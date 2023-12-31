@@ -39,12 +39,14 @@ const Feed = () => {
 
   const filterPrompts = (searchtext) => {
     const regex = new RegExp(searchtext, "i"); // 'i' flag for case-insensitive search
-    return allPosts.filter(
-      (item) =>
-        regex.test(item.creator.username) ||
+    return allPosts.filter((item) => {
+      return (
+        (item.creator && regex.test(item.creator.username)) ||
         regex.test(item.tag) ||
         regex.test(item.prompt)
-    );
+      );
+    });
+    
   };
 
   const handleSearchChange = (e) => {
